@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GameCreator:jar">
+    <output-path>$USER_HOME$/OneDrive/Рабочий стол/Server/plugins</output-path>
+    <root id="archive" name="GameCreator.jar">
+      <element id="module-output" name="GameCreator" />
+    </root>
+  </artifact>
+</component>

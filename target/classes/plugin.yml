@@ -1,0 +1,13 @@
+name: GameCreator
+version: '1.0'
+main: org.spgerg.gamecreator.Main
+api-version: 1.13
+authors: [ SpGerg ]
+description: Plugin for creating mini-games with out programming on your server!
+
+commands:
+  gamecreator:
+    description: Game creator main command
+    aliases:
+      - gc
+      - gcr
