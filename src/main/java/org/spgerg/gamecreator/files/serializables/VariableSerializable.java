@@ -10,5 +10,5 @@ public class VariableSerializable implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         return null;
-    } //tomorrow....
+    } //tomorrow.....
 }
