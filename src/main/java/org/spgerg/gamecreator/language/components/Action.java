@@ -7,7 +7,7 @@ import org.spgerg.gamecreator.language.scripts.Script;
 
 import java.util.List;
 
-public abstract class Action implements Component {
+public abstract class Action extends Component {
 
     public final String name;
 
@@ -36,5 +36,10 @@ public abstract class Action implements Component {
         }
 
         return true;
+    }
+
+    @Override
+    public String getComponentName() {
+        return "ACTION";
     }
 }

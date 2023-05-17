@@ -1,7 +1,8 @@
 package org.spgerg.gamecreator.language.components;
 
-public interface Component {
-    String getName();
+public abstract class Component {
 
-    String getComponentName();
+    public abstract String getName();
+
+    public abstract String getComponentName();
 }
