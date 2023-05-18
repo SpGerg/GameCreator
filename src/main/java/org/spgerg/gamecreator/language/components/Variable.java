@@ -16,6 +16,6 @@ public abstract class Variable extends Component {
 
     @Override
     public String getComponentName() {
-        return "ACTION";
+        return "VARIABLE";
     }
 }

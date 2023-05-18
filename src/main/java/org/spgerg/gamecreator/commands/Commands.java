@@ -28,7 +28,7 @@ public class Commands implements CommandExecutor {
             }
         }
 
-        player.sendMessage("Command " + args[1] + " not be found.");
+        player.sendMessage("Command " + args[0] + " not be found.");
 
         return true;
     }

@@ -27,6 +27,8 @@ public class Functions {
             }
 
             player.sendMessage((String) message);
+
+            return;
         }
 
         throw new NullArgumentException(action.name);

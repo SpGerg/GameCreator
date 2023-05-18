@@ -5,6 +5,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.spgerg.gamecreator.language.components.Component;
 import org.spgerg.gamecreator.language.programs.Program;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,10 @@ public class ScriptSerializable implements ConfigurationSerializable {
         this.name = name;
         this.program = program;
         this.components = components;
+
+        if (components == null) {
+            components = new ArrayList<>();
+        }
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Add extends Subcommand {
             return true;
         }
 
-        //Files.instance.addScript(new ScriptSerializable(arguments[1], program, null), world);
+        Files.instance.addScript(new ScriptSerializable(arguments[1], program, null), world);
 
         return true;
     }

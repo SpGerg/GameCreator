@@ -1,5 +1,6 @@
 package org.spgerg.gamecreator.files;
 
+import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,7 +29,7 @@ public class Files {
         programsConfiguration = YamlConfiguration.loadConfiguration(programsFile);
     }
 
-    public boolean isProgramExistsWithName(String name, World world) {
+    public boolean isProgramExists(String name, World world) {
         ConfigurationSection section = programsConfiguration.getConfigurationSection(world.getName());
 
         Set<String> keys;
@@ -47,7 +48,7 @@ public class Files {
     }
 
     public void addProgram(ProgramSerializable program, World world) {
-        ConfigurationSection section = programsConfiguration.getConfigurationSection(world.getName());
+        ConfigurationSection section = programsConfiguration.getConfigurationSection(world.getName() + ".programs");
 
         List<ProgramSerializable> programsList = new ArrayList<>();
 
@@ -63,35 +64,49 @@ public class Files {
 
         programsList.add(program);
 
-        programsConfiguration.set(getProgramPath(program.name, world.getName()), programsList);
+        for (ProgramSerializable _program : programsList) {
+            programsConfiguration.set(getProgramPath(_program.name, world.getName()), _program);
+        }
 
         try {
             programsConfiguration.save(programsFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        updateConfigurations();
     }
 
     public ProgramSerializable getProgram(String name, World world) {
+        updateConfigurations();
+
         return programsConfiguration.getSerializable(getProgramPath(name, world.getName()), ProgramSerializable.class);
     }
 
     public void addScript(ScriptSerializable script, World world) {
-        ProgramSerializable program = getProgram(script.program.name, world);
+        ProgramSerializable program = script.program;
 
         if (program == null) {
-            throw new IllegalArgumentException(script.program.name);
+            throw new NullArgumentException(script.name);
         }
 
         program.scripts.add(script);
 
-        programsConfiguration.set(getProgramPath(script.program.name, world.getName()), program);
+        for (ScriptSerializable _script : program.scripts) {
+            programsConfiguration.set(getProgramPath(program.name, world.getName()) + ".scripts." + _script.name, _script);
+        }
 
         try {
             programsConfiguration.save(programsFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        updateConfigurations();
+    }
+
+    private void updateConfigurations() {
+        programsConfiguration = YamlConfiguration.loadConfiguration(programsFile);
     }
 
     private String getProgramPath(String name, String world_name) {

@@ -23,7 +23,13 @@ public class ProgramSerializable implements ConfigurationSerializable {
     }
 
     public static ProgramSerializable deserialize(Map<String, Object> args) {
-        return new ProgramSerializable((String) args.get("name"), (List<ScriptSerializable>) args.get("scripts"));
+        List<ScriptSerializable> list = (List<ScriptSerializable>) args.get("scripts");
+
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
+        return new ProgramSerializable((String) args.get("name"), list);
     }
 
     @Override
